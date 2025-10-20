@@ -1,0 +1,25 @@
+<div class="app-container">
+  <header class="app-header">
+    <h1>📱 Reddit Client</h1>
+    <button class="add-column-btn" (click)="showAddDialog()">➕ Add Subreddit</button>
+  </header>
+  
+  <main class="columns-container">
+    @if (subreddits().length === 0) {
+      <div class="empty-state">
+        <div class="empty-content">
+          <h2>👋 Welcome to Reddit Client</h2>
+          <p>Click the "Add Subreddit" button to start exploring Reddit!</p>
+          <button class="cta-button" (click)="showAddDialog()">Get Started</button>
+        </div>
+      </div>
+    } @else {
+      @for (subreddit of subreddits(); track subreddit) {
+        <app-subreddit-column 
+          [subreddit]="subreddit" 
+          (close)="removeSubreddit(subreddit)">
+        </app-subreddit-column>
+      }
+    }
+  </main>
+</div>
